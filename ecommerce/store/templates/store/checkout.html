@@ -1,0 +1,47 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<section class="section">
+    <h1>Checkout</h1>
+    <p class="muted">Use this screen to confirm order details and collect payment information.</p>
+    <div class="checkout-layout">
+        <div>
+            <h2>Order summary</h2>
+            {% if items %}
+                <ul class="summary-list">
+                    {% for item in items %}
+                        <li>
+                            <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                            <strong>${{ item.line_total }}</strong>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="cart-summary">
+                    <span>Total</span>
+                    <strong>${{ total }}</strong>
+                </div>
+            {% else %}
+                <p class="muted">No items in cart.</p>
+            {% endif %}
+        </div>
+        <div class="checkout-panel">
+            <h2>Customer details</h2>
+            <form>
+                <label>
+                    Full name
+                    <input type="text" placeholder="Alex Morgan">
+                </label>
+                <label>
+                    Email address
+                    <input type="email" placeholder="alex@example.com">
+                </label>
+                <label>
+                    Shipping address
+                    <textarea rows="3" placeholder="123 Market Street"></textarea>
+                </label>
+                <button class="button" type="button">Submit order</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

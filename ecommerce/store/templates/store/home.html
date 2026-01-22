@@ -1,0 +1,41 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Curated products for modern shoppers</h1>
+        <p>Discover featured collections, browse categories, and build your cart in minutes.</p>
+        <a class="button" href="{% url 'product_list' %}">Start Shopping</a>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Featured products</h2>
+    <div class="grid">
+        {% for product in featured_products %}
+            <article class="card">
+                <h3>{{ product.name }}</h3>
+                <p class="muted">{{ product.category.name }}</p>
+                <p>{{ product.description|truncatewords:20 }}</p>
+                <div class="card-footer">
+                    <span>${{ product.price }}</span>
+                    <a class="link" href="{% url 'product_detail' product.id %}">View</a>
+                </div>
+            </article>
+        {% empty %}
+            <p class="muted">No featured products yet. Add some in the admin.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <h2>Shop by category</h2>
+    <div class="pill-group">
+        {% for category in categories %}
+            <a class="pill" href="{% url 'product_list' %}?category={{ category.id }}">{{ category.name }}</a>
+        {% empty %}
+            <p class="muted">Create categories to help shoppers find what they love.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

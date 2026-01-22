@@ -1,0 +1,29 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<section class="section">
+    <h1>Shop all products</h1>
+    <div class="filter-row">
+        <span class="muted">Filter by category:</span>
+        <a class="pill" href="{% url 'product_list' %}">All</a>
+        {% for category in categories %}
+            <a class="pill {% if selected_category and selected_category.id == category.id %}active{% endif %}" href="{% url 'product_list' %}?category={{ category.id }}">{{ category.name }}</a>
+        {% endfor %}
+    </div>
+    <div class="grid">
+        {% for product in products %}
+            <article class="card">
+                <h3>{{ product.name }}</h3>
+                <p class="muted">{{ product.category.name }}</p>
+                <p>{{ product.description|truncatewords:18 }}</p>
+                <div class="card-footer">
+                    <span>${{ product.price }}</span>
+                    <a class="link" href="{% url 'product_detail' product.id %}">View</a>
+                </div>
+            </article>
+        {% empty %}
+            <p class="muted">No products available yet.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
