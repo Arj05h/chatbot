@@ -1,19 +1,38 @@
-# 💬 Chatbot template
+# E-Commerce Hub (Django)
 
-A simple Streamlit app that shows how to build a chatbot using OpenAI's GPT-3.5.
+A full-featured starter e-commerce website built with Django. It includes product browsing, category filtering, a session-backed cart, and a checkout-ready layout.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://chatbot-template.streamlit.app/)
+## Features
 
-### How to run it on your own machine
+- Product catalog with categories and featured products
+- Session cart with add/remove flows
+- Checkout screen template for order capture
+- Django admin configuration for product management
 
-1. Install the requirements
+## Getting started
+
+1. Install dependencies
 
    ```
-   $ pip install -r requirements.txt
+   pip install -r requirements.txt
    ```
 
-2. Run the app
+2. Run migrations
 
    ```
-   $ streamlit run streamlit_app.py
+   python ecommerce/manage.py migrate
    ```
+
+3. Create a superuser (optional, for admin access)
+
+   ```
+   python ecommerce/manage.py createsuperuser
+   ```
+
+4. Start the development server
+
+   ```
+   python ecommerce/manage.py runserver
+   ```
+
+5. Visit the site at `http://127.0.0.1:8000/` and add products in the admin at `http://127.0.0.1:8000/admin/`.

@@ -1,0 +1,31 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<section class="section">
+    <h1>Your cart</h1>
+    {% if items %}
+        <div class="cart-items">
+            {% for item in items %}
+                <div class="cart-item">
+                    <div>
+                        <h3>{{ item.product.name }}</h3>
+                        <p class="muted">Qty: {{ item.quantity }}</p>
+                    </div>
+                    <div class="cart-actions">
+                        <span>${{ item.line_total }}</span>
+                        <a class="link" href="{% url 'remove_from_cart' item.product.id %}">Remove</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="cart-summary">
+            <span>Total</span>
+            <strong>${{ total }}</strong>
+        </div>
+        <a class="button" href="{% url 'checkout' %}">Proceed to checkout</a>
+    {% else %}
+        <p class="muted">Your cart is empty. Browse the catalog to add items.</p>
+        <a class="button" href="{% url 'product_list' %}">Browse products</a>
+    {% endif %}
+</section>
+{% endblock %}
